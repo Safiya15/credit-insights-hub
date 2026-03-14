@@ -85,7 +85,7 @@ const ApplicationsPage: React.FC = () => {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">No applications found</td></tr>
+                <tr><td colSpan={10} className="px-4 py-8 text-center text-muted-foreground">No applications found</td></tr>
               )}
             </tbody>
           </table>
