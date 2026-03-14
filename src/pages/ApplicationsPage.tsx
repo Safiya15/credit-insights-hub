@@ -77,6 +77,11 @@ const ApplicationsPage: React.FC = () => {
                     <span className={`inline-block text-[10px] px-2 py-0.5 rounded-full font-medium ${statusColor[app.status]}`}>{app.status}</span>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{app.date}</td>
+                  <td className="px-4 py-3 text-center">
+                    <Button size="sm" variant="ghost" onClick={() => navigate(`/cam-report/${app.id}`)} className="text-xs gap-1">
+                      <FileText className="h-3 w-3" /> View
+                    </Button>
+                  </td>
                 </tr>
               ))}
               {filtered.length === 0 && (
