@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+# Credit Risk AI Analyzer
 
-## Project info
+An AI-powered loan evaluation system for banks that 
+automates credit risk assessment using financial 
+ratio analysis and fraud detection.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Live Demo
+https://trusty-loan.lovable.app
 
-## How can I edit this code?
+## Team
+Apex-28 | HACK2026 by Kanan.co
 
-There are several ways of editing your application.
+## Problem
+Banks spend days manually evaluating loan applications.
+Human bias and slow processing leads to poor decisions
+and financial losses.
 
-**Use Lovable**
+## Solution
+AI-powered credit risk analyzer that evaluates any
+company loan application in seconds using real
+financial ratio analysis and automated scoring.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Features
+- AI Credit Scoring from 0 to 100
+- Fraud Detection with pattern analysis
+- Financial Analytics Dashboard
+- Role-based Access Control (Admin, Manager, Analyst)
+- Loan Application Management
+- Risk Level Classification (Low, Medium, High)
+- Approve, Review, Reject recommendations
 
-Changes made via Lovable will be committed automatically to this repo.
+## Scoring Algorithm
+The credit score is calculated using these ratios:
+- Debt-to-Income Ratio
+- Profit Margin
+- Liquidity Ratio
+- Loan-to-Asset Ratio
+- Cash Flow Analysis
+- Fraud Pattern Detection
 
-**Use your preferred IDE**
+Score above 70 = Low Risk = Approve
+Score 40 to 70 = Medium Risk = Review
+Score below 40 = High Risk = Reject
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
+## Tech Stack
 - React
-- shadcn-ui
-- Tailwind CSS
+- TypeScript
+- TailwindCSS
+- Chart.js
+- Lovable AI
 
-## How can I deploy this project?
+## Login Credentials
+Email: priya@bank.com
+Password: Credit@123
+Role: Credit Manager
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Test Data
 
-## Can I connect a custom domain to my Lovable project?
+Company 1 - Expected Result: Approve
+Revenue: 2,00,00,000
+Net Profit: 40,00,000
+Total Debt: 20,00,000
+Assets: 3,00,00,000
+Liabilities: 30,00,000
+Cash Flow: 35,00,000
 
-Yes, you can!
+Company 2 - Expected Result: Review
+Revenue: 90,00,000
+Net Profit: 8,00,000
+Total Debt: 70,00,000
+Assets: 1,20,00,000
+Liabilities: 80,00,000
+Cash Flow: 5,00,000
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Company 3 - Expected Result: Reject
+Revenue: 60,00,000
+Net Profit: -15,00,000
+Total Debt: 1,80,00,000
+Assets: 80,00,000
+Liabilities: 1,90,00,000
+Cash Flow: -20,00,000
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Track
+Workflow Automation - HACK2026
