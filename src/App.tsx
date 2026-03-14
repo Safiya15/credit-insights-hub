@@ -12,6 +12,7 @@ import ApplicationsPage from "@/pages/ApplicationsPage";
 import NewApplicationPage from "@/pages/NewApplicationPage";
 import AnalyticsPage from "@/pages/AnalyticsPage";
 import AdminPage from "@/pages/AdminPage";
+import CAMReportPage from "@/pages/CAMReportPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const AuthenticatedApp = () => {
             <Route path="/applications" element={<ApplicationsPage />} />
             <Route path="/new-application" element={<NewApplicationPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/cam-report/:id" element={<CAMReportPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

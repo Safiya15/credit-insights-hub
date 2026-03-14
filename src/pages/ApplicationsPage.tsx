@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppData } from "@/contexts/AppDataContext";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Search, FileText } from "lucide-react";
 
 const riskColor: Record<string, string> = {
   Low: "bg-risk-low text-risk-low-foreground",
@@ -19,6 +21,7 @@ const statusColor: Record<string, string> = {
 };
 
 const ApplicationsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { applications } = useAppData();
   const [search, setSearch] = useState("");
 
@@ -55,6 +58,7 @@ const ApplicationsPage: React.FC = () => {
                 <th className="text-center px-4 py-3 font-medium text-muted-foreground">Recommendation</th>
                 <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Date</th>
+                <th className="text-center px-4 py-3 font-medium text-muted-foreground">CAM Report</th>
               </tr>
             </thead>
             <tbody>
@@ -73,10 +77,15 @@ const ApplicationsPage: React.FC = () => {
                     <span className={`inline-block text-[10px] px-2 py-0.5 rounded-full font-medium ${statusColor[app.status]}`}>{app.status}</span>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{app.date}</td>
+                  <td className="px-4 py-3 text-center">
+                    <Button size="sm" variant="ghost" onClick={() => navigate(`/cam-report/${app.id}`)} className="text-xs gap-1">
+                      <FileText className="h-3 w-3" /> View
+                    </Button>
+                  </td>
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">No applications found</td></tr>
+                <tr><td colSpan={10} className="px-4 py-8 text-center text-muted-foreground">No applications found</td></tr>
               )}
             </tbody>
           </table>
