@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, Upload, ArrowRight, ArrowLeft } from "lucide-react";
+import { CheckCircle, Upload, ArrowRight, ArrowLeft, FileText, Sparkles } from "lucide-react";
 
 const INDUSTRIES = ["Technology", "Manufacturing", "Healthcare", "Real Estate", "Retail", "Agriculture", "Education", "Logistics", "Finance", "Energy"];
 
@@ -22,7 +22,53 @@ const NewApplicationPage: React.FC = () => {
   const [industry, setIndustry] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
 
-  const [docs, setDocs] = useState({ balanceSheet: false, gst: false, bankStatement: false, financialReport: false });
+  const [docs, setDocs] = useState<Record<string, { uploaded: boolean; fileName: string }>>({
+    balanceSheet: { uploaded: false, fileName: "" },
+    gst: { uploaded: false, fileName: "" },
+    bankStatement: { uploaded: false, fileName: "" },
+    financialReport: { uploaded: false, fileName: "" },
+  });
+  const fileInputRefs = React.useRef<Record<string, HTMLInputElement | null>>({});
+
+  const DEMO_COMPANY = {
+    companyName: "Zenith Innovations Pvt Ltd",
+    industry: "Technology",
+    loanAmount: "7500000",
+    revenue: "32000000",
+    netProfit: "5800000",
+    totalDebt: "4200000",
+    assets: "28000000",
+    liabilities: "11000000",
+    cashFlow: "7200000",
+  };
+
+  const loadDemoCompany = () => {
+    setCompanyName(DEMO_COMPANY.companyName);
+    setIndustry(DEMO_COMPANY.industry);
+    setLoanAmount(DEMO_COMPANY.loanAmount);
+    setRevenue(DEMO_COMPANY.revenue);
+    setNetProfit(DEMO_COMPANY.netProfit);
+    setTotalDebt(DEMO_COMPANY.totalDebt);
+    setAssets(DEMO_COMPANY.assets);
+    setLiabilities(DEMO_COMPANY.liabilities);
+    setCashFlow(DEMO_COMPANY.cashFlow);
+  };
+
+  const loadDemoDocs = () => {
+    setDocs({
+      balanceSheet: { uploaded: true, fileName: "Zenith_BalanceSheet_2025.pdf" },
+      gst: { uploaded: true, fileName: "Zenith_GST_Returns_Q4.pdf" },
+      bankStatement: { uploaded: true, fileName: "Zenith_BankStatement_Mar2026.pdf" },
+      financialReport: { uploaded: true, fileName: "Zenith_AnnualReport_2025.pdf" },
+    });
+  };
+
+  const handleFileSelect = (doc: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setDocs((d) => ({ ...d, [doc]: { uploaded: true, fileName: file.name } }));
+    }
+  };
 
   const [revenue, setRevenue] = useState("");
   const [netProfit, setNetProfit] = useState("");
@@ -44,8 +90,9 @@ const NewApplicationPage: React.FC = () => {
     setResult(scoring);
 
     const statusMap: Record<string, "Approved" | "Rejected" | "In Review"> = { Approve: "Approved", Reject: "Rejected", Review: "In Review" };
+    const nextId = applications.length + 1;
     const newApp = {
-      id: `APP-${String(applications.length + 1).padStart(3, "0")}`,
+      id: `APP-${String(nextId).padStart(3, "0")}`,
       companyName: companyName || "Unnamed Company",
       industry: industry || "Other",
       loanAmount: +loanAmount || 0,
@@ -118,7 +165,12 @@ const NewApplicationPage: React.FC = () => {
       <Card className="p-6">
         {step === 1 && (
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Company Information</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Company Information</h2>
+              <Button size="sm" variant="outline" onClick={loadDemoCompany} className="text-xs">
+                <Sparkles className="h-3 w-3 mr-1" /> Load Demo Company
+              </Button>
+            </div>
             <div>
               <Label>Company Name</Label>
               <Input className="mt-1" value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="Enter company name" />
@@ -140,18 +192,42 @@ const NewApplicationPage: React.FC = () => {
 
         {step === 2 && (
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Upload Documents</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Upload Documents</h2>
+              <Button size="sm" variant="outline" onClick={loadDemoDocs} className="text-xs">
+                <Sparkles className="h-3 w-3 mr-1" /> Load Demo Docs
+              </Button>
+            </div>
             {(["balanceSheet", "gst", "bankStatement", "financialReport"] as const).map((doc) => {
               const labels: Record<string, string> = { balanceSheet: "Balance Sheet", gst: "GST Data", bankStatement: "Bank Statement", financialReport: "Financial Report" };
               return (
-                <div key={doc} className={`flex items-center justify-between p-3 rounded-lg border ${docs[doc] ? "border-risk-low/50 bg-risk-low/5" : "border-border"}`}>
-                  <span className="text-sm">{labels[doc]}</span>
+                <div key={doc} className={`flex items-center justify-between p-3 rounded-lg border ${docs[doc].uploaded ? "border-risk-low/50 bg-risk-low/5" : "border-border"}`}>
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-muted-foreground" />
+                    <div>
+                      <span className="text-sm font-medium">{labels[doc]}</span>
+                      {docs[doc].uploaded && <p className="text-xs text-muted-foreground">{docs[doc].fileName}</p>}
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    className="hidden"
+                    ref={(el) => { fileInputRefs.current[doc] = el; }}
+                    accept=".pdf,.xlsx,.csv,.doc,.docx"
+                    onChange={(e) => handleFileSelect(doc, e)}
+                  />
                   <Button
                     size="sm"
-                    variant={docs[doc] ? "outline" : "default"}
-                    onClick={() => setDocs((d) => ({ ...d, [doc]: !d[doc] }))}
+                    variant={docs[doc].uploaded ? "outline" : "default"}
+                    onClick={() => {
+                      if (docs[doc].uploaded) {
+                        setDocs((d) => ({ ...d, [doc]: { uploaded: false, fileName: "" } }));
+                      } else {
+                        fileInputRefs.current[doc]?.click();
+                      }
+                    }}
                   >
-                    {docs[doc] ? <><CheckCircle className="h-3 w-3 mr-1" /> Uploaded</> : <><Upload className="h-3 w-3 mr-1" /> Upload</>}
+                    {docs[doc].uploaded ? <><CheckCircle className="h-3 w-3 mr-1" /> Remove</> : <><Upload className="h-3 w-3 mr-1" /> Browse</>}
                   </Button>
                 </div>
               );
