@@ -58,6 +58,7 @@ const ApplicationsPage: React.FC = () => {
                 <th className="text-center px-4 py-3 font-medium text-muted-foreground">Recommendation</th>
                 <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Date</th>
+                <th className="text-center px-4 py-3 font-medium text-muted-foreground">CAM Report</th>
               </tr>
             </thead>
             <tbody>
