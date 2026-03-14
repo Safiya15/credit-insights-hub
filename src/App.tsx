@@ -12,6 +12,7 @@ import ApplicationsPage from "@/pages/ApplicationsPage";
 import NewApplicationPage from "@/pages/NewApplicationPage";
 import AnalyticsPage from "@/pages/AnalyticsPage";
 import AdminPage from "@/pages/AdminPage";
+import CAMReportPage from "@/pages/CAMReportPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
