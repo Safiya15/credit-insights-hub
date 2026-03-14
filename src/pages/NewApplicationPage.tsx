@@ -90,8 +90,9 @@ const NewApplicationPage: React.FC = () => {
     setResult(scoring);
 
     const statusMap: Record<string, "Approved" | "Rejected" | "In Review"> = { Approve: "Approved", Reject: "Rejected", Review: "In Review" };
+    const nextId = applications.length + 1;
     const newApp = {
-      id: `APP-${String(applications.length + 1).padStart(3, "0")}`,
+      id: `APP-${String(nextId).padStart(3, "0")}`,
       companyName: companyName || "Unnamed Company",
       industry: industry || "Other",
       loanAmount: +loanAmount || 0,
