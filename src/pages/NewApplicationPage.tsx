@@ -192,18 +192,42 @@ const NewApplicationPage: React.FC = () => {
 
         {step === 2 && (
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Upload Documents</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Upload Documents</h2>
+              <Button size="sm" variant="outline" onClick={loadDemoDocs} className="text-xs">
+                <Sparkles className="h-3 w-3 mr-1" /> Load Demo Docs
+              </Button>
+            </div>
             {(["balanceSheet", "gst", "bankStatement", "financialReport"] as const).map((doc) => {
               const labels: Record<string, string> = { balanceSheet: "Balance Sheet", gst: "GST Data", bankStatement: "Bank Statement", financialReport: "Financial Report" };
               return (
-                <div key={doc} className={`flex items-center justify-between p-3 rounded-lg border ${docs[doc] ? "border-risk-low/50 bg-risk-low/5" : "border-border"}`}>
-                  <span className="text-sm">{labels[doc]}</span>
+                <div key={doc} className={`flex items-center justify-between p-3 rounded-lg border ${docs[doc].uploaded ? "border-risk-low/50 bg-risk-low/5" : "border-border"}`}>
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-muted-foreground" />
+                    <div>
+                      <span className="text-sm font-medium">{labels[doc]}</span>
+                      {docs[doc].uploaded && <p className="text-xs text-muted-foreground">{docs[doc].fileName}</p>}
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    className="hidden"
+                    ref={(el) => { fileInputRefs.current[doc] = el; }}
+                    accept=".pdf,.xlsx,.csv,.doc,.docx"
+                    onChange={(e) => handleFileSelect(doc, e)}
+                  />
                   <Button
                     size="sm"
-                    variant={docs[doc] ? "outline" : "default"}
-                    onClick={() => setDocs((d) => ({ ...d, [doc]: !d[doc] }))}
+                    variant={docs[doc].uploaded ? "outline" : "default"}
+                    onClick={() => {
+                      if (docs[doc].uploaded) {
+                        setDocs((d) => ({ ...d, [doc]: { uploaded: false, fileName: "" } }));
+                      } else {
+                        fileInputRefs.current[doc]?.click();
+                      }
+                    }}
                   >
-                    {docs[doc] ? <><CheckCircle className="h-3 w-3 mr-1" /> Uploaded</> : <><Upload className="h-3 w-3 mr-1" /> Upload</>}
+                    {docs[doc].uploaded ? <><CheckCircle className="h-3 w-3 mr-1" /> Remove</> : <><Upload className="h-3 w-3 mr-1" /> Browse</>}
                   </Button>
                 </div>
               );
