@@ -165,7 +165,12 @@ const NewApplicationPage: React.FC = () => {
       <Card className="p-6">
         {step === 1 && (
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Company Information</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Company Information</h2>
+              <Button size="sm" variant="outline" onClick={loadDemoCompany} className="text-xs">
+                <Sparkles className="h-3 w-3 mr-1" /> Load Demo Company
+              </Button>
+            </div>
             <div>
               <Label>Company Name</Label>
               <Input className="mt-1" value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="Enter company name" />
