@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, Upload, ArrowRight, ArrowLeft } from "lucide-react";
+import { CheckCircle, Upload, ArrowRight, ArrowLeft, FileText, Sparkles } from "lucide-react";
 
 const INDUSTRIES = ["Technology", "Manufacturing", "Healthcare", "Real Estate", "Retail", "Agriculture", "Education", "Logistics", "Finance", "Energy"];
 
