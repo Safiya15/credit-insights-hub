@@ -5,7 +5,7 @@ automates credit risk assessment using financial
 ratio analysis and fraud detection.
 
 ## Live Demo
-https://trusty-loan.lovable.app
+https://credit-insights-hub.vercel.app/
 
 ## Team
 Apex-28 | HACK2026 by Kanan.co
