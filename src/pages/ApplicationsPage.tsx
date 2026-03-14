@@ -21,6 +21,7 @@ const statusColor: Record<string, string> = {
 };
 
 const ApplicationsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { applications } = useAppData();
   const [search, setSearch] = useState("");
 
