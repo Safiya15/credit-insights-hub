@@ -22,7 +22,53 @@ const NewApplicationPage: React.FC = () => {
   const [industry, setIndustry] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
 
-  const [docs, setDocs] = useState({ balanceSheet: false, gst: false, bankStatement: false, financialReport: false });
+  const [docs, setDocs] = useState<Record<string, { uploaded: boolean; fileName: string }>>({
+    balanceSheet: { uploaded: false, fileName: "" },
+    gst: { uploaded: false, fileName: "" },
+    bankStatement: { uploaded: false, fileName: "" },
+    financialReport: { uploaded: false, fileName: "" },
+  });
+  const fileInputRefs = React.useRef<Record<string, HTMLInputElement | null>>({});
+
+  const DEMO_COMPANY = {
+    companyName: "Zenith Innovations Pvt Ltd",
+    industry: "Technology",
+    loanAmount: "7500000",
+    revenue: "32000000",
+    netProfit: "5800000",
+    totalDebt: "4200000",
+    assets: "28000000",
+    liabilities: "11000000",
+    cashFlow: "7200000",
+  };
+
+  const loadDemoCompany = () => {
+    setCompanyName(DEMO_COMPANY.companyName);
+    setIndustry(DEMO_COMPANY.industry);
+    setLoanAmount(DEMO_COMPANY.loanAmount);
+    setRevenue(DEMO_COMPANY.revenue);
+    setNetProfit(DEMO_COMPANY.netProfit);
+    setTotalDebt(DEMO_COMPANY.totalDebt);
+    setAssets(DEMO_COMPANY.assets);
+    setLiabilities(DEMO_COMPANY.liabilities);
+    setCashFlow(DEMO_COMPANY.cashFlow);
+  };
+
+  const loadDemoDocs = () => {
+    setDocs({
+      balanceSheet: { uploaded: true, fileName: "Zenith_BalanceSheet_2025.pdf" },
+      gst: { uploaded: true, fileName: "Zenith_GST_Returns_Q4.pdf" },
+      bankStatement: { uploaded: true, fileName: "Zenith_BankStatement_Mar2026.pdf" },
+      financialReport: { uploaded: true, fileName: "Zenith_AnnualReport_2025.pdf" },
+    });
+  };
+
+  const handleFileSelect = (doc: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setDocs((d) => ({ ...d, [doc]: { uploaded: true, fileName: file.name } }));
+    }
+  };
 
   const [revenue, setRevenue] = useState("");
   const [netProfit, setNetProfit] = useState("");
