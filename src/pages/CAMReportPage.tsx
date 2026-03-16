@@ -74,6 +74,7 @@ const CAMReportPage: React.FC = () => {
       <Tabs defaultValue="report" className="print:hidden">
         <TabsList className="mb-4">
           <TabsTrigger value="report"><FileText className="h-4 w-4 mr-1.5" /> CAM Report</TabsTrigger>
+          <TabsTrigger value="scorecard"><BarChart3 className="h-4 w-4 mr-1.5" /> Health Scorecard</TabsTrigger>
           <TabsTrigger value="chat"><Bot className="h-4 w-4 mr-1.5" /> AI Underwriter Chat</TabsTrigger>
         </TabsList>
 
