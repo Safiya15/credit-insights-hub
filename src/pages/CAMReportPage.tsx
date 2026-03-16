@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText, Bot } from "lucide-react";
 import AIUnderwriterChat from "@/components/AIUnderwriterChat";
+import FinancialHealthScorecard from "@/components/FinancialHealthScorecard";
 
 const fmt = (n: number) => `₹${(n / 100000).toFixed(2)}L`;
 const fmtCr = (n: number) => n >= 10000000 ? `₹${(n / 10000000).toFixed(2)}Cr` : fmt(n);
@@ -73,8 +74,13 @@ const CAMReportPage: React.FC = () => {
       <Tabs defaultValue="report" className="print:hidden">
         <TabsList className="mb-4">
           <TabsTrigger value="report"><FileText className="h-4 w-4 mr-1.5" /> CAM Report</TabsTrigger>
+          <TabsTrigger value="scorecard"><BarChart3 className="h-4 w-4 mr-1.5" /> Health Scorecard</TabsTrigger>
           <TabsTrigger value="chat"><Bot className="h-4 w-4 mr-1.5" /> AI Underwriter Chat</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="scorecard" className="print:hidden">
+          <FinancialHealthScorecard ratios={scoring.ratios} industry={app.industry} />
+        </TabsContent>
 
         <TabsContent value="chat" className="print:hidden">
           <AIUnderwriterChat application={app} scoring={scoring} />

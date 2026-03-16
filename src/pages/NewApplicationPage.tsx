@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Upload, ArrowRight, ArrowLeft, FileText, Sparkles } from "lucide-react";
+import AutoDraftEmail from "@/components/AutoDraftEmail";
 
 const INDUSTRIES = ["Technology", "Manufacturing", "Healthcare", "Real Estate", "Retail", "Agriculture", "Education", "Logistics", "Finance", "Energy"];
 
@@ -141,6 +142,17 @@ const NewApplicationPage: React.FC = () => {
         <div className="flex gap-3">
           <Button variant="outline" onClick={() => { setResult(null); setStep(1); }}>New Application</Button>
           <Button onClick={() => navigate("/applications")}>View Applications</Button>
+          <AutoDraftEmail
+            companyName={companyName || "Unnamed Company"}
+            loanAmount={+loanAmount || 0}
+            industry={industry || "Other"}
+            recommendation={result.recommendation}
+            score={result.score}
+            riskLevel={result.riskLevel}
+            explanation={result.explanation}
+            ratios={result.ratios}
+            fraudFlags={result.fraudFlags}
+          />
         </div>
       </div>
     );
