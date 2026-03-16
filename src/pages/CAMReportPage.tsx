@@ -81,19 +81,6 @@ const CAMReportPage: React.FC = () => {
         </TabsContent>
 
         <TabsContent value="report">
-        <Button variant="outline" onClick={() => navigate("/applications")}>
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back
-        </Button>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handlePrint}>
-            <Printer className="mr-2 h-4 w-4" /> Print Report
-          </Button>
-          <Button onClick={handlePrint}>
-            <Download className="mr-2 h-4 w-4" /> Download PDF
-          </Button>
-        </div>
-      </div>
-
       {/* Printable Report */}
       <div ref={printRef} className="space-y-6 print:space-y-4">
         {/* Report Header */}
