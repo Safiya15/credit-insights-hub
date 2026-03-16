@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppData } from "@/contexts/AppDataContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -7,7 +7,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText, Bot } from "lucide-react";
+import AIUnderwriterChat from "@/components/AIUnderwriterChat";
 
 const fmt = (n: number) => `₹${(n / 100000).toFixed(2)}L`;
 const fmtCr = (n: number) => n >= 10000000 ? `₹${(n / 10000000).toFixed(2)}Cr` : fmt(n);
