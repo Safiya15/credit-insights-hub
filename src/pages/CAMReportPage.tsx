@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText, Bot } from "lucide-react";
 import AIUnderwriterChat from "@/components/AIUnderwriterChat";
+import FinancialHealthScorecard from "@/components/FinancialHealthScorecard";
 
 const fmt = (n: number) => `₹${(n / 100000).toFixed(2)}L`;
 const fmtCr = (n: number) => n >= 10000000 ? `₹${(n / 10000000).toFixed(2)}Cr` : fmt(n);
