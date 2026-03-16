@@ -70,6 +70,30 @@ const CAMReportPage: React.FC = () => {
         </div>
       </div>
 
+      <Tabs defaultValue="report" className="print:hidden">
+        <TabsList className="mb-4">
+          <TabsTrigger value="report"><FileText className="h-4 w-4 mr-1.5" /> CAM Report</TabsTrigger>
+          <TabsTrigger value="chat"><Bot className="h-4 w-4 mr-1.5" /> AI Underwriter Chat</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="chat" className="print:hidden">
+          <AIUnderwriterChat application={app} scoring={scoring} />
+        </TabsContent>
+
+        <TabsContent value="report">
+        <Button variant="outline" onClick={() => navigate("/applications")}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back
+        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handlePrint}>
+            <Printer className="mr-2 h-4 w-4" /> Print Report
+          </Button>
+          <Button onClick={handlePrint}>
+            <Download className="mr-2 h-4 w-4" /> Download PDF
+          </Button>
+        </div>
+      </div>
+
       {/* Printable Report */}
       <div ref={printRef} className="space-y-6 print:space-y-4">
         {/* Report Header */}
