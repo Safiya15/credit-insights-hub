@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppData } from "@/contexts/AppDataContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -7,7 +7,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft, Printer, Download, Building2, TrendingUp, ShieldCheck, AlertTriangle, BarChart3, FileText, Bot } from "lucide-react";
+import AIUnderwriterChat from "@/components/AIUnderwriterChat";
 
 const fmt = (n: number) => `₹${(n / 100000).toFixed(2)}L`;
 const fmtCr = (n: number) => n >= 10000000 ? `₹${(n / 10000000).toFixed(2)}Cr` : fmt(n);
@@ -68,6 +70,17 @@ const CAMReportPage: React.FC = () => {
         </div>
       </div>
 
+      <Tabs defaultValue="report" className="print:hidden">
+        <TabsList className="mb-4">
+          <TabsTrigger value="report"><FileText className="h-4 w-4 mr-1.5" /> CAM Report</TabsTrigger>
+          <TabsTrigger value="chat"><Bot className="h-4 w-4 mr-1.5" /> AI Underwriter Chat</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="chat" className="print:hidden">
+          <AIUnderwriterChat application={app} scoring={scoring} />
+        </TabsContent>
+
+        <TabsContent value="report">
       {/* Printable Report */}
       <div ref={printRef} className="space-y-6 print:space-y-4">
         {/* Report Header */}
@@ -335,6 +348,15 @@ const CAMReportPage: React.FC = () => {
             <p>Authorized Signatory: {user?.name || "—"}</p>
           </div>
         </Card>
+      </div>
+        </TabsContent>
+      </Tabs>
+
+      {/* Print-only: render report directly */}
+      <div className="hidden print:block">
+        <div ref={printRef} className="space-y-4">
+          {/* Print content uses the same report rendered above */}
+        </div>
       </div>
     </div>
   );
