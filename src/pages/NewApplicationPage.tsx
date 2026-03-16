@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Upload, ArrowRight, ArrowLeft, FileText, Sparkles } from "lucide-react";
+import AutoDraftEmail from "@/components/AutoDraftEmail";
 
 const INDUSTRIES = ["Technology", "Manufacturing", "Healthcare", "Real Estate", "Retail", "Agriculture", "Education", "Logistics", "Finance", "Energy"];
 
