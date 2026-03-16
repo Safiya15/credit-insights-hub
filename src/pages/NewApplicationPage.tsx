@@ -142,6 +142,17 @@ const NewApplicationPage: React.FC = () => {
         <div className="flex gap-3">
           <Button variant="outline" onClick={() => { setResult(null); setStep(1); }}>New Application</Button>
           <Button onClick={() => navigate("/applications")}>View Applications</Button>
+          <AutoDraftEmail
+            companyName={companyName || "Unnamed Company"}
+            loanAmount={+loanAmount || 0}
+            industry={industry || "Other"}
+            recommendation={result.recommendation}
+            score={result.score}
+            riskLevel={result.riskLevel}
+            explanation={result.explanation}
+            ratios={result.ratios}
+            fraudFlags={result.fraudFlags}
+          />
         </div>
       </div>
     );
