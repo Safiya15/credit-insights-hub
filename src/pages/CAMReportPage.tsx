@@ -362,6 +362,15 @@ const CAMReportPage: React.FC = () => {
           </div>
         </Card>
       </div>
+        </TabsContent>
+      </Tabs>
+
+      {/* Print-only: render report directly */}
+      <div className="hidden print:block">
+        <div ref={printRef} className="space-y-4">
+          {/* Print content uses the same report rendered above */}
+        </div>
+      </div>
     </div>
   );
 };
