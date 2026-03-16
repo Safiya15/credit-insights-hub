@@ -78,6 +78,10 @@ const CAMReportPage: React.FC = () => {
           <TabsTrigger value="chat"><Bot className="h-4 w-4 mr-1.5" /> AI Underwriter Chat</TabsTrigger>
         </TabsList>
 
+        <TabsContent value="scorecard" className="print:hidden">
+          <FinancialHealthScorecard ratios={scoring.ratios} industry={app.industry} />
+        </TabsContent>
+
         <TabsContent value="chat" className="print:hidden">
           <AIUnderwriterChat application={app} scoring={scoring} />
         </TabsContent>
